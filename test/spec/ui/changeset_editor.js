@@ -1,7 +1,13 @@
 describe('uiChangesetEditor', function() {
     var body, context, container, content, input, changeset;
     //klass = combobox-comment
-
+    var data = [
+        {title: 'foobar', value: 'foobar'},
+        {title: 'foo', value: 'foo'},
+        {title: 'bar', value: 'bar'},
+        {title: 'Baz', value: 'Baz'},
+        {title: 'test', value: 'test'}
+    ];
     function simulateKeypress(key) {
         var keyCode = iD.utilKeybinding.keyCodes[key];
         var value = input.property('value');
@@ -84,7 +90,7 @@ describe('uiChangesetEditor', function() {
     });
 
     it('shows a warning after passing maxChars value', function(){
-        input.call(changeset);
+        input.call(changeset.tags(data));
         focusTypeahead(input);
         const maxChars = context.maxCharsForTagKey();
         for (let i = 0; i < maxChars + 1; i++){
@@ -94,7 +100,7 @@ describe('uiChangesetEditor', function() {
     });
 
     it('shows a warning after typing google', function(){
-        input.call(changeset);
+        input.call(changeset.tags(data));
         focusTypeahead(input);
         simulateKeypress('g');
         simulateKeypress('o');
